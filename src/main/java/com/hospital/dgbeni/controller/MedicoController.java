@@ -1,8 +1,8 @@
 package com.hospital.dgbeni.controller;
 
-import com.hospital.dgbeni.model.Paciente;
-import com.hospital.dgbeni.dto.PacienteRequestDto;
-import com.hospital.dgbeni.service.PacienteService;
+import com.hospital.dgbeni.dto.MedicoRequestDto;
+import com.hospital.dgbeni.model.Medico;
+import com.hospital.dgbeni.service.MedicoService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -12,15 +12,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/pacientes")
-public class PacienteController {
+@RequestMapping("/medicos")
+public class MedicoController {
 
     @Autowired
-    private PacienteService pacienteService;
+    private MedicoService medicoService;
 
     @PostMapping
-    public ResponseEntity<Paciente> cadastraPaciente(@RequestBody @Valid PacienteRequestDto dto) {
-        Paciente pacienteSalvo = pacienteService.cadastrar(dto);
-        return ResponseEntity.ok(pacienteSalvo);
+    public ResponseEntity<Medico> cadastraMedico(@RequestBody @Valid MedicoRequestDto dto) {
+        Medico medicoSalvo = medicoService.cadastrar(dto);
+        return ResponseEntity.ok(medicoSalvo);
     }
 }

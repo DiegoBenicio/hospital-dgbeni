@@ -1,18 +1,17 @@
-package com.hospital.dgbeni.model;
+package com.hospital.dgbeni.dto;
 
+import com.hospital.dgbeni.model.Endereco;
+import com.hospital.dgbeni.model.Especialidade;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Past;
 
-import java.time.LocalDate;
-
-public record PacienteRequestDto(
+public record MedicoRequestDto(
         @NotBlank String nome,
-        @NotNull @Past LocalDate dataDeNascimento,
         @NotBlank @Email String email,
         @NotBlank String telefone,
-        @NotNull Sexo sexo,
+        @NotBlank String crm,
+        @NotNull Especialidade especialidade,
         @NotNull Endereco endereco
 ) {
 }
