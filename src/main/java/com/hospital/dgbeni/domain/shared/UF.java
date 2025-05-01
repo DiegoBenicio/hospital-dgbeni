@@ -1,4 +1,4 @@
-package com.hospital.dgbeni.model;
+package com.hospital.dgbeni.domain.shared;
 
 public enum UF {
     AC, AL, AP, AM, BA, CE, DF, ES, GO, MA, MT,

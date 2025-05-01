@@ -1,7 +1,7 @@
-package com.hospital.dgbeni.dto;
+package com.hospital.dgbeni.api.dto;
 
-import com.hospital.dgbeni.model.Endereco;
-import com.hospital.dgbeni.model.Especialidade;
+import com.hospital.dgbeni.domain.shared.Endereco;
+import com.hospital.dgbeni.domain.shared.Especialidade;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;

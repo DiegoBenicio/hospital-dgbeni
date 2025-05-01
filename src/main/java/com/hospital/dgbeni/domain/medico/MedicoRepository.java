@@ -1,6 +1,5 @@
-package com.hospital.dgbeni.repository;
+package com.hospital.dgbeni.domain.medico;
 
-import com.hospital.dgbeni.model.Medico;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface MedicoRepository extends JpaRepository<Medico, Long> {

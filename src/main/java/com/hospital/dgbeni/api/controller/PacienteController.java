@@ -1,8 +1,8 @@
-package com.hospital.dgbeni.controller;
+package com.hospital.dgbeni.api.controller;
 
-import com.hospital.dgbeni.model.Paciente;
-import com.hospital.dgbeni.dto.PacienteRequestDto;
-import com.hospital.dgbeni.service.PacienteService;
+import com.hospital.dgbeni.domain.paciente.Paciente;
+import com.hospital.dgbeni.api.dto.PacienteRequestDto;
+import com.hospital.dgbeni.application.PacienteService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

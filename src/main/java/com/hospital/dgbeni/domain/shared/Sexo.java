@@ -1,4 +1,4 @@
-package com.hospital.dgbeni.model;
+package com.hospital.dgbeni.domain.shared;
 
 public enum Sexo {
     FEMININO,

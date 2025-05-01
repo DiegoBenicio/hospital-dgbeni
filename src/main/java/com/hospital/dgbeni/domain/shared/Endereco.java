@@ -1,4 +1,4 @@
-package com.hospital.dgbeni.model;
+package com.hospital.dgbeni.domain.shared;
 
 import jakarta.persistence.Embeddable;
 import jakarta.persistence.EnumType;

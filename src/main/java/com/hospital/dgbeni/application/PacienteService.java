@@ -1,8 +1,8 @@
-package com.hospital.dgbeni.service;
+package com.hospital.dgbeni.application;
 
-import com.hospital.dgbeni.model.Paciente;
-import com.hospital.dgbeni.dto.PacienteRequestDto;
-import com.hospital.dgbeni.repository.PacienteRepository;
+import com.hospital.dgbeni.domain.paciente.Paciente;
+import com.hospital.dgbeni.api.dto.PacienteRequestDto;
+import com.hospital.dgbeni.domain.paciente.PacienteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
