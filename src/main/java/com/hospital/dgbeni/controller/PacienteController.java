@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.net.URI;
+
 @RestController
 @RequestMapping("/pacientes")
 public class PacienteController {
@@ -21,6 +23,7 @@ public class PacienteController {
     @PostMapping
     public ResponseEntity<Paciente> cadastraPaciente(@RequestBody @Valid PacienteRequestDto dto) {
         Paciente pacienteSalvo = pacienteService.cadastrar(dto);
-        return ResponseEntity.ok(pacienteSalvo);
+        URI uri = URI.create("/pacientes/" + pacienteSalvo.getId());
+        return ResponseEntity.created(uri).body(pacienteSalvo);
     }
 }
