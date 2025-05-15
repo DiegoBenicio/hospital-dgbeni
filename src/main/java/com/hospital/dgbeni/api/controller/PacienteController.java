@@ -6,6 +6,7 @@ import com.hospital.dgbeni.api.dto.PacienteRequestDto;
 import com.hospital.dgbeni.application.PacienteService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -39,5 +40,11 @@ public class PacienteController {
     public ResponseEntity<PacienteResponseDto> buscarPorId(@PathVariable Long id) {
         Paciente paciente = pacienteService.buscarPorId(id);
         return ResponseEntity.ok(new PacienteResponseDto(paciente));
+    }
+
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void excluirPaciente(@PathVariable Long id) {
+        pacienteService.excluir(id);
     }
 }

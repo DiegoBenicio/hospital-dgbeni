@@ -40,4 +40,8 @@ public class Medico {
 
     @Column(nullable = false)
     private Boolean ativo = true;
+
+    public void inativar() {
+        this.ativo = false;
+    }
 }

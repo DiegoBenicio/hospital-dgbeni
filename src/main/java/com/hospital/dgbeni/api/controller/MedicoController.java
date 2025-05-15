@@ -6,6 +6,7 @@ import com.hospital.dgbeni.domain.medico.Medico;
 import com.hospital.dgbeni.application.MedicoService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -39,5 +40,11 @@ public class MedicoController {
     public ResponseEntity<MedicoResponseDto> buscarPorId(@PathVariable Long id) {
         Medico medico = medicoService.buscarPorId(id);
         return ResponseEntity.ok(new MedicoResponseDto(medico));
+    }
+
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void excluiMedico(@PathVariable Long id) {
+        medicoService.excluir(id);
     }
 }

@@ -6,6 +6,7 @@ import com.hospital.dgbeni.domain.paciente.PacienteRepository;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -40,5 +41,13 @@ public class PacienteService {
 
     public Paciente buscarPorId(Long id) {
         return pacienteRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Paciente com ID " + id + " não encontrado."));
+    }
+
+    @Transactional
+    public void excluir(Long id) {
+        Paciente paciente = pacienteRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Paciente com ID " + id + " não encontrado."));
+
+        paciente.inativar();
+        pacienteRepository.save(paciente);
     }
 }
