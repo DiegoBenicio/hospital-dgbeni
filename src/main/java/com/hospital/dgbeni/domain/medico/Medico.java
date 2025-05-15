@@ -1,5 +1,6 @@
 package com.hospital.dgbeni.domain.medico;
 
+import com.hospital.dgbeni.api.dto.MedicoUpdateRequestDto;
 import com.hospital.dgbeni.domain.shared.Endereco;
 import com.hospital.dgbeni.domain.shared.Especialidade;
 import jakarta.persistence.*;
@@ -43,5 +44,39 @@ public class Medico {
 
     public void inativar() {
         this.ativo = false;
+    }
+
+    public void atualizaInformacoes(MedicoUpdateRequestDto dto) {
+        if (dto.nome() != null && !dto.nome().isBlank()) {
+            this.nome = dto.nome();
+        }
+
+        if (dto.email() != null && !dto.email().isBlank()) {
+            this.email = dto.email();
+        }
+
+        if (dto.telefone() != null && !dto.telefone().isBlank()) {
+            this.telefone = dto.telefone();
+        }
+        if (dto.endereco() != null) {
+            Endereco enderecoDto = dto.endereco();
+
+            this.endereco = new Endereco(
+                    enderecoDto.rua() != null ? enderecoDto.rua() : this.endereco.rua(),
+                    enderecoDto.numero() != null ? enderecoDto.numero() : this.endereco.numero(),
+                    enderecoDto.complemento() != null ? enderecoDto.complemento() : this.endereco.complemento(),
+                    enderecoDto.bairro() != null ? enderecoDto.bairro() : this.endereco.bairro(),
+                    enderecoDto.cidade() != null ? enderecoDto.cidade() : this.endereco.cidade(),
+                    enderecoDto.estado() != null ? enderecoDto.estado() : this.endereco.estado(),
+                    enderecoDto.cep() != null ? enderecoDto.cep() : this.endereco.cep()
+            );
+        }
+    }
+
+    public void atualizarParcial(String nome, String email, String telefone, String crm) {
+        if (nome != null && !nome.isBlank()) this.nome = nome;
+        if (email != null && !email.isBlank()) this.email = email;
+        if (telefone != null && !telefone.isBlank()) this.telefone = telefone;
+        if (crm != null && !crm.isBlank()) this.crm = crm;
     }
 }

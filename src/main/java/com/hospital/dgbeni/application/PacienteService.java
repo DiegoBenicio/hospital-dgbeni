@@ -48,6 +48,5 @@ public class PacienteService {
         Paciente paciente = pacienteRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Paciente com ID " + id + " não encontrado."));
 
         paciente.inativar();
-        pacienteRepository.save(paciente);
     }
 }

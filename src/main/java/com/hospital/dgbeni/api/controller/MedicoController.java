@@ -1,7 +1,9 @@
 package com.hospital.dgbeni.api.controller;
 
+import com.hospital.dgbeni.api.dto.MedicoPatchRequestDto;
 import com.hospital.dgbeni.api.dto.MedicoRequestDto;
 import com.hospital.dgbeni.api.dto.MedicoResponseDto;
+import com.hospital.dgbeni.api.dto.MedicoUpdateRequestDto;
 import com.hospital.dgbeni.domain.medico.Medico;
 import com.hospital.dgbeni.application.MedicoService;
 import jakarta.validation.Valid;
@@ -46,5 +48,17 @@ public class MedicoController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void excluiMedico(@PathVariable Long id) {
         medicoService.excluir(id);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Medico> atualizaMedico(@PathVariable Long id, @RequestBody @Valid MedicoUpdateRequestDto updateRequestDto) {
+        medicoService.atualizar(id, updateRequestDto);
+        return ResponseEntity.noContent().build();
+    }
+
+    @PatchMapping("/{id}")
+    public ResponseEntity<Medico> atualizaParcial(@PathVariable Long id, @RequestBody @Valid MedicoPatchRequestDto dto) {
+        medicoService.atualizaParcial(id, dto);
+        return ResponseEntity.noContent().build();
     }
 }
