@@ -29,8 +29,7 @@ public class MedicoController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "Médico cadastrado com sucesso"),
             @ApiResponse(responseCode = "400", description = "Requisição inválida. Verifique os campos obrigatórios e o formato dos dados"),
-            @ApiResponse(responseCode = "500", description = "Erro interno inesperado no servidor. Tente novamente mais tarde ou entre em contato com o suporte"
-            )
+            @ApiResponse(responseCode = "500", description = "Erro interno inesperado no servidor. Tente novamente mais tarde ou entre em contato com o suporte")
 
     })
     @PostMapping
@@ -74,7 +73,6 @@ public class MedicoController {
             @ApiResponse(responseCode = "500", description = "Erro interno inesperado ao tentar excluir o médico")
     })
     @DeleteMapping("/{id}")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
     public ResponseEntity<Void> excluiMedico(@PathVariable Long id) {
         medicoService.excluir(id);
         return ResponseEntity.noContent().build();

@@ -58,6 +58,7 @@ public class Medico {
         if (dto.telefone() != null && !dto.telefone().isBlank()) {
             this.telefone = dto.telefone();
         }
+
         if (dto.endereco() != null) {
             Endereco enderecoDto = dto.endereco();
 

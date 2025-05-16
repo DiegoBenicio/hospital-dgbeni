@@ -1,12 +1,16 @@
 package com.hospital.dgbeni.application;
 
+import com.hospital.dgbeni.api.dto.PacientePatchRequestDto;
+import com.hospital.dgbeni.api.dto.PacienteUpdateRequestDto;
 import com.hospital.dgbeni.domain.paciente.Paciente;
 import com.hospital.dgbeni.api.dto.PacienteRequestDto;
 import com.hospital.dgbeni.domain.paciente.PacienteRepository;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -43,10 +47,28 @@ public class PacienteService {
         return pacienteRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Paciente com ID " + id + " não encontrado."));
     }
 
-    @Transactional
     public void excluir(Long id) {
         Paciente paciente = pacienteRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Paciente com ID " + id + " não encontrado."));
 
         paciente.inativar();
+
+        pacienteRepository.save(paciente);
+    }
+
+    public void atualizar(Long id, PacienteUpdateRequestDto updateRequestDto) {
+        Paciente paciente = pacienteRepository.findById(id)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Paciente não encontrado"));
+
+        paciente.atualizaInformacoes(updateRequestDto);
+
+        pacienteRepository.save(paciente);
+    }
+
+    public void atualizaParcial(Long id, PacientePatchRequestDto dto) {
+        Paciente paciente = pacienteRepository.findById(id)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Paciente não encontrado"));
+
+        paciente.atualizarParcial();
+        pacienteRepository.save(paciente);
     }
 }
