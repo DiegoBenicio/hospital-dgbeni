@@ -68,7 +68,7 @@ public class PacienteService {
         Paciente paciente = pacienteRepository.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Paciente não encontrado"));
 
-        paciente.atualizarParcial();
+        paciente.atualizarParcial(dto.nome(), dto.dataDeNascimento(), dto.email(), dto.telefone(), dto.sexo());
         pacienteRepository.save(paciente);
     }
 }
