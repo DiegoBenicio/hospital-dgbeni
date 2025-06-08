@@ -97,7 +97,7 @@ public class PacienteController {
             @ApiResponse(responseCode = "404", description = "Paciente não encontrado com o ID informado"),
             @ApiResponse(responseCode = "500", description = "Erro interno ao atualizar parcialmente os dados do paciente")
     })
-    @PatchMapping
+    @PatchMapping("/{id}")
     public ResponseEntity<Paciente> atualizaParcial(@PathVariable Long id, @RequestBody @Valid PacientePatchRequestDto dto) {
         pacienteService.atualizaParcial(id, dto);
         return ResponseEntity.noContent().build();
