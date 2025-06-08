@@ -47,31 +47,10 @@ public class Medico {
     }
 
     public void atualizaInformacoes(MedicoUpdateRequestDto dto) {
-        if (dto.nome() != null && !dto.nome().isBlank()) {
-            this.nome = dto.nome();
-        }
-
-        if (dto.email() != null && !dto.email().isBlank()) {
-            this.email = dto.email();
-        }
-
-        if (dto.telefone() != null && !dto.telefone().isBlank()) {
-            this.telefone = dto.telefone();
-        }
-
-        if (dto.endereco() != null) {
-            Endereco enderecoDto = dto.endereco();
-
-            this.endereco = new Endereco(
-                    enderecoDto.rua() != null ? enderecoDto.rua() : this.endereco.rua(),
-                    enderecoDto.numero() != null ? enderecoDto.numero() : this.endereco.numero(),
-                    enderecoDto.complemento() != null ? enderecoDto.complemento() : this.endereco.complemento(),
-                    enderecoDto.bairro() != null ? enderecoDto.bairro() : this.endereco.bairro(),
-                    enderecoDto.cidade() != null ? enderecoDto.cidade() : this.endereco.cidade(),
-                    enderecoDto.estado() != null ? enderecoDto.estado() : this.endereco.estado(),
-                    enderecoDto.cep() != null ? enderecoDto.cep() : this.endereco.cep()
-            );
-        }
+        this.nome = dto.nome();
+        this.email = dto.email();
+        this.telefone = dto.telefone();
+        this.endereco = dto.endereco();
     }
 
     public void atualizarParcial(String nome, String email, String telefone, String crm) {
