@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class PacienteService {
@@ -70,5 +71,10 @@ public class PacienteService {
 
         paciente.atualizarParcial(dto.nome(), dto.dataDeNascimento(), dto.email(), dto.telefone(), dto.sexo());
         pacienteRepository.save(paciente);
+    }
+
+    public Optional<Paciente> buscarPorIdOptional(Long id) {
+        return pacienteRepository.findById(id)
+                .filter(Paciente::getAtivo);
     }
 }

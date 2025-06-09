@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class MedicoService {
@@ -68,5 +69,10 @@ public class MedicoService {
         medico.atualizarParcial(dto.nome(), dto.email(), dto.telefone(), dto.crm());
 
         medicoRepository.save(medico);
+    }
+
+    public Optional<Medico> buscarPorIdOptional(Long id) {
+        return medicoRepository.findById(id)
+                .filter(Medico::getAtivo);
     }
 }

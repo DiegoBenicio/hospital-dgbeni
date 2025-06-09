@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/pacientes")
@@ -32,10 +33,10 @@ public class PacienteController {
 
     })
     @PostMapping
-    public ResponseEntity<Paciente> cadastraPaciente(@RequestBody @Valid PacienteRequestDto dto) {
+    public ResponseEntity<PacienteResponseDto> cadastraPaciente(@RequestBody @Valid PacienteRequestDto dto) {
         Paciente pacienteSalvo = pacienteService.cadastrar(dto);
         URI uri = URI.create("/pacientes/" + pacienteSalvo.getId());
-        return ResponseEntity.created(uri).body(pacienteSalvo);
+        return ResponseEntity.created(uri).body(new PacienteResponseDto(pacienteSalvo));
     }
 
     @Operation(summary = "Busca todos os paciente", description = "Retorna os dados de todos pacientes")
@@ -61,8 +62,10 @@ public class PacienteController {
     })
     @GetMapping("/{id}")
     public ResponseEntity<PacienteResponseDto> buscarPorId(@PathVariable Long id) {
-        Paciente paciente = pacienteService.buscarPorId(id);
-        return ResponseEntity.ok(new PacienteResponseDto(paciente));
+        Optional<Paciente> pacienteOpt = pacienteService.buscarPorIdOptional(id);
+        return pacienteOpt.map(
+                p -> ResponseEntity.ok(new PacienteResponseDto(p)))
+                .orElse(ResponseEntity.notFound().build());
     }
 
     @Operation(summary = "Exclui um paciente pelo ID", description = "Método para exclusão do paciente com o ID especificado")
@@ -85,7 +88,7 @@ public class PacienteController {
             @ApiResponse(responseCode = "500", description = "Erro interno ao atualizar dados do paciente")
     })
     @PutMapping("/{id}")
-    public ResponseEntity<Paciente> atualizaPaciente(@PathVariable Long id, @RequestBody @Valid PacienteUpdateRequestDto updateRequestDto) {
+    public ResponseEntity<Void> atualizaPaciente(@PathVariable Long id, @RequestBody @Valid PacienteUpdateRequestDto updateRequestDto) {
        pacienteService.atualizar(id, updateRequestDto);
        return ResponseEntity.noContent().build();
     }
@@ -98,7 +101,7 @@ public class PacienteController {
             @ApiResponse(responseCode = "500", description = "Erro interno ao atualizar parcialmente os dados do paciente")
     })
     @PatchMapping("/{id}")
-    public ResponseEntity<Paciente> atualizaParcial(@PathVariable Long id, @RequestBody @Valid PacientePatchRequestDto dto) {
+    public ResponseEntity<Void> atualizaParcial(@PathVariable Long id, @RequestBody @Valid PacientePatchRequestDto dto) {
         pacienteService.atualizaParcial(id, dto);
         return ResponseEntity.noContent().build();
     }
